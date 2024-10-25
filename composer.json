@@ -1,6 +1,6 @@
 {
   "name": "huubverbeek/laravel-model-attributes-validation",
-  "description": "Validates the model attributes on saving.",
+  "description": "Enables attribute-based validation of model attributes automatically during the save process.",
   "type": "library",
   "license": "MIT",
   "authors": [
