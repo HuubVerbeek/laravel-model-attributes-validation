@@ -1,0 +1,41 @@
+{
+  "name": "huubverbeek/laravel-model-attributes-validation",
+  "description": "Validates the model attributes on saving.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "You",
+      "email": "you@you.you",
+      "role": "developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "HuubVerbeek\\ModelAttributesValidation\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HuubVerbeek\\ModelAttributesValidation\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "HuubVerbeek\\ModelAttributesValidation\\ModelAttributesValidationServiceProvider"
+      ]
+    }
+  },
+  "require-dev": {
+    "orchestra/testbench": "^9",
+    "phpunit/phpunit": "^11",
+    "laravel/pint": "^1"
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-f": "vendor/bin/phpunit --filter",
+    "pint": "vendor/bin/pint",
+    "pint-t": "vendor/bin/pint --test"
+  }
+}
