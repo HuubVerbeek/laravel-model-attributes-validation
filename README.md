@@ -12,6 +12,10 @@ composer require huubverbeek/laravel-model-attributes-validation
 
 Once installed, Laravel will automatically register the service provider.
 
+## Support
+
+This project requires PHP version 8 or higher.
+
 ## Usage
 
 1. **Define a Validation Rules Class**:
