@@ -5,8 +5,8 @@ namespace HuubVerbeek\ModelAttributesValidation\Tests\Helpers;
 use HuubVerbeek\ModelAttributesValidation\Attributes\ValidationRules;
 use Illuminate\Database\Eloquent\Model;
 
-#[ValidationRules(TestModelRules::class)]
-class TestModel extends Model
+#[ValidationRules(TestModelRulesWithDefaults::class)]
+class TestModelWithDefaults extends Model
 {
     protected $guarded = [];
 
