@@ -4,12 +4,12 @@ namespace HuubVerbeek\ModelAttributesValidation\Tests\Helpers;
 
 use HuubVerbeek\ModelAttributesValidation\ValidationRules;
 
-class TestModelValidationRules extends ValidationRules
+class TestModelRules extends ValidationRules
 {
     public function rules(): array
     {
         return [
-            'test' => ['required'],
+            'property' => ['required'],
         ];
     }
 }

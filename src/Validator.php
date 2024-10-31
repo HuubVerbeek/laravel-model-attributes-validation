@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace HuubVerbeek\ModelAttributesValidation;
 
 use HuubVerbeek\ModelAttributesValidation\Attributes\ValidationRules as RulesAttribute;
+use HuubVerbeek\ModelAttributesValidation\Contracts\WithDefaults;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator as IlluminateValidator;
 use Illuminate\Validation\ValidationException;
@@ -30,9 +31,46 @@ class Validator
         }
 
         IlluminateValidator::make(
-            $this->model->attributesToArray(),
-            $rules->rules(),
+            ...$this->prepare($this->model, $rules)
         )->validate();
+    }
+
+    private function prepare(Model $model, ValidationRules $rules): array
+    {
+        if (! $model->exists) {
+            return $this->isCreating($model, $rules);
+        }
+
+        return $this->isUpdating($model, $rules);
+    }
+
+    private function isCreating(Model $model, ValidationRules $rules): array
+    {
+        return $rules instanceof WithDefaults
+            ? $this->withDefaults($model, $rules)
+            : [$model->attributesToArray(), $rules->rules()];
+    }
+
+    private function isUpdating(Model $model, ValidationRules $rules): array
+    {
+        return [
+            $model->attributesToArray(),
+            array_intersect_key($rules->rules(), $model->attributesToArray()),
+        ];
+    }
+
+    private function withDefaults(Model $model, ValidationRules $rules): array
+    {
+        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+        $defaults = array_diff_key(
+            $rules->defaults(),
+            $model->attributesToArray()
+        );
+
+        return [
+            $model->fill($defaults)->attributesToArray(),
+            $rules->rules(),
+        ];
     }
 
     private function getRules(): ?ValidationRules
