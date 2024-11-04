@@ -44,7 +44,7 @@ This project requires PHP version 8 or higher.
    ```
 2. **Defining Defaults for the Validatable Attributes**:
    In some cases you might want to define default values for validatable attributes if you are creating a resource.
-   You can do this like this: 
+   You can do this by implementing the `WithDefaults` interface: 
 
    ```php
    use HuubVerbeek\ModelAttributesValidation\ValidationRules;
