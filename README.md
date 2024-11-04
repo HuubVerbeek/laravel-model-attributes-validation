@@ -24,6 +24,9 @@ This project requires PHP version 8 or higher.
    ```php
    use HuubVerbeek\ModelAttributesValidation\ValidationRules;
 
+    /**
+     * @property User $model
+     */
    class UserValidationRules extends ValidationRules
    {
        public function rules(): array
@@ -39,8 +42,31 @@ This project requires PHP version 8 or higher.
        }
    }
    ```
+2. **Defining Defaults for the Validatable Attributes**:
+   In some cases you might want to define default values for validatable attributes if you are creating a resource.
+   You can do this like this: 
 
-2. **Apply Validation to Your Model**:
+   ```php
+   use HuubVerbeek\ModelAttributesValidation\ValidationRules;
+   
+   /**
+    * @property User $model
+    */
+   class UserValidationRules extends ValidationRules implements WithDefaults
+   {
+        public function rules(): array {
+            //
+        }
+   
+        public function defaults(): array {
+            return [
+                'name' => 'Hans Kazan',
+            ];
+        }
+   }
+   ```
+
+3. **Apply Validation to Your Model**:
    Add the `#[ValidationRules(UserValidationRules::class)]` attribute to your model to associate it with the validation rules class.
 
    ```php
@@ -54,7 +80,7 @@ This project requires PHP version 8 or higher.
    }
    ```
 
-3. **Saving and Validation**:
+4. **Saving and Validation**:
    When you attempt to save the model, the package will automatically validate the model's attributes according to the specified rules. If validation fails, a `ValidationException` will be thrown.
 
    ```php
